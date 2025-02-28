@@ -55,4 +55,41 @@ fn test_config_bangs() {
     for (_, url) in config.bangs.iter() {
         assert!(url.contains("{searchTerms}"), "URL template should contain {{searchTerms}} placeholder");
     }
-} 
+}
+
+#[test]
+fn test_extract_bang_beginning() {
+    // Test bangs at the beginning
+    assert_eq!(extract_bang("!g search term"), (Some("!g"), "search term"));
+    assert_eq!(extract_bang("!ddg another search"), (Some("!ddg"), "another search"));
+    assert_eq!(extract_bang("!w"), (Some("!w"), ""));
+}
+
+#[test]
+fn test_extract_bang_end() {
+    // Test bangs at the end
+    assert_eq!(extract_bang("search term !g"), (Some("!g"), "search term"));
+    assert_eq!(extract_bang("another search !ddg"), (Some("!ddg"), "another search"));
+}
+
+#[test]
+fn test_extract_bang_with_whitespace() {
+    // Test with extra whitespace
+    assert_eq!(extract_bang("  !g search term  "), (Some("!g"), "search term"));
+    assert_eq!(extract_bang("  search term !g  "), (Some("!g"), "search term"));
+}
+
+#[test]
+fn test_no_bang() {
+    // Test with no bang
+    assert_eq!(extract_bang("just a search"), (None, "just a search"));
+    assert_eq!(extract_bang(""), (None, ""));
+    assert_eq!(extract_bang("   "), (None, ""));
+}
+
+#[test]
+fn test_invalid_bang_patterns() {
+    // Test with invalid bang patterns
+    assert_eq!(extract_bang("search with ! in middle"), (None, "search with ! in middle"));
+    assert_eq!(extract_bang("g!"), (None, "g!"));
+}

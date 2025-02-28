@@ -7,3 +7,6 @@ bangs:
   "!maps": "https://www.google.com/maps?q={searchTerms}&source=web"
   "!reddit": "https://www.reddit.com/search?q={searchTerms}"
   "!twitter": "https://twitter.com/search?q={searchTerms}" 
+  "!gpt": "https://chatgpt.com/?q={searchTerms}" 
+  "!ai": "https://chatgpt.com/?q={searchTerms}" 
+  "!t3": "https://www.t3.chat/new?q={searchTerms}"

@@ -9,6 +9,7 @@ use std::collections::HashMap;
 use crate::models::SearchQuery;
 use crate::bangs::extract_bang;
 use serde::Serialize;
+use tower_http::cors::{CorsLayer, Any};
 
 // New struct for the JSON response
 #[derive(Serialize)]
@@ -18,10 +19,17 @@ struct BangInfo {
 }
 
 pub fn create_router() -> Router<HashMap<String, String>> {
+    // Create a CORS layer that allows any origin
+    let cors = CorsLayer::new()
+        .allow_origin(Any)
+        .allow_methods(Any)
+        .allow_headers(Any);
+
     Router::new()
         .route("/search", get(search_handler))
         .route("/health", get(health_check))
         .route("/live", get(live_handler))
+        .layer(cors)
 }
 
 // Health check endpoint
@@ -45,16 +53,12 @@ async fn search_handler(
     // Extract bang if present
     let (bang, search_term) = extract_bang(&query);
     
-    // Debug print
-    println!("Query: '{}', Bang: '{:?}', Search Term: '{}'", 
-             query, bang, search_term);
-    
+    // Debug print    
     if let Some(bang_key) = bang {
         // Check if this bang exists in our configuration
         if let Some(url_template) = bangs.get(bang_key) {
             // Replace the placeholder with the encoded search term
             let redirect_url = url_template.replace("{searchTerms}", &urlencoding::encode(search_term));
-            println!("Redirecting to: {}", redirect_url);
             return Redirect::to(&redirect_url);
         } else {
             println!("Bang '{}' not found in configuration", bang_key);
