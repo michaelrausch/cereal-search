@@ -11,7 +11,7 @@ use tower::ServiceExt;
 
 async fn make_request(query: Option<&str>) -> Response {
     let config = default_config();
-    let app = create_router().with_state(config.bangs);
+    let app = create_router().with_state(config);
     
     let uri = match query {
         Some(q) => format!("/search?q={}", urlencoding::encode(q)),

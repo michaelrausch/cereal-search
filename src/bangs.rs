@@ -17,7 +17,7 @@ pub fn extract_bang(query: &str) -> (Option<&str>, &str) {
     
     // Check for bangs at the end of the query
     if trimmed.ends_with('!') && trimmed.contains(' ') {
-        let last_space_pos = trimmed.rfind(' ').unwrap();
+        let last_space_pos: usize = trimmed.rfind(' ').unwrap();
         let search_term = &trimmed[..last_space_pos];
         let bang = &trimmed[last_space_pos + 1..];
         

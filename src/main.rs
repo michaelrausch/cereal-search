@@ -20,7 +20,7 @@ async fn main() {
     };
     
     // Build our application with routes
-    let app = routes::create_router().with_state(config.bangs);
+    let app = routes::create_router().with_state(config);
 
     // Run the server
     let addr = SocketAddr::from(([0, 0, 0, 0], 9876));

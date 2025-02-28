@@ -12,8 +12,8 @@ async fn test_default_config() {
     assert!(config.bangs.contains_key("!yt"));
     
     // Test URL format
-    for (_, url) in config.bangs.iter() {
-        assert!(url.contains("{searchTerms}"), "URL should contain placeholder");
+    for (_, details) in config.bangs.iter() {
+        assert!(details.url.contains("{searchTerms}"), "URL should contain placeholder");
     }
 }
 
@@ -36,8 +36,14 @@ async fn test_load_config_valid_yaml() {
     // Write test config to the file
     let yaml_content = r#"
 bangs:
-  "!test": "https://example.com/search?q={searchTerms}"
-  "!custom": "https://custom.example.com/?query={searchTerms}&other=param"
+  "!test": 
+    url: "https://example.com/search?q={searchTerms}"
+    name: "Test"
+    icon: "test"
+  "!custom": 
+    url: "https://custom.example.com/?query={searchTerms}&other=param"
+    name: "Custom"
+    icon: "custom"
 "#;
     
     temp_file.write_all(yaml_content.as_bytes()).unwrap();
@@ -55,7 +61,7 @@ bangs:
     assert!(config.bangs.contains_key("!custom"));
     
     assert_eq!(
-        config.bangs.get("!test").unwrap(),
+        config.bangs.get("!test").unwrap().url,
         "https://example.com/search?q={searchTerms}"
     );
 }

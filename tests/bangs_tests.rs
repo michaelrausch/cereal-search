@@ -43,17 +43,17 @@ fn test_config_bangs() {
     
     // Test the URL templates
     assert_eq!(
-        config.bangs.get("!g").unwrap(),
+        config.bangs.get("!g").unwrap().url,
         "https://www.google.com/search?q={searchTerms}"
     );
     assert_eq!(
-        config.bangs.get("!ddg").unwrap(),
+        config.bangs.get("!ddg").unwrap().url,
         "https://duckduckgo.com/?q={searchTerms}"
     );
     
     // Test that the URL templates contain the placeholder
-    for (_, url) in config.bangs.iter() {
-        assert!(url.contains("{searchTerms}"), "URL template should contain {{searchTerms}} placeholder");
+    for (_, details) in config.bangs.iter() {
+        assert!(details.url.contains("{searchTerms}"), "URL template should contain {{searchTerms}} placeholder");
     }
 }
 
