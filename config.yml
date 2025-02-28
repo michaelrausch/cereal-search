@@ -1,0 +1,9 @@
+bangs:
+  "!g": "https://www.google.com/search?q={searchTerms}"
+  "!ddg": "https://duckduckgo.com/?q={searchTerms}"
+  "!yt": "https://www.youtube.com/results?search_query={searchTerms}"
+  "!gh": "https://github.com/search?q={searchTerms}"
+  "!w": "https://en.wikipedia.org/wiki/Special:Search?search={searchTerms}"
+  "!maps": "https://www.google.com/maps?q={searchTerms}&source=web"
+  "!reddit": "https://www.reddit.com/search?q={searchTerms}"
+  "!twitter": "https://twitter.com/search?q={searchTerms}" 

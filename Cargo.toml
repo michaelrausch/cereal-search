@@ -1,0 +1,15 @@
+[package]
+name = "bang_search"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.6.18"
+tokio = { version = "1.28.2", features = ["full"] }
+serde = { version = "1.0.163", features = ["derive"] }
+urlencoding = "2.1.2"
+serde_yaml = "0.9.21"
+
+[dev-dependencies]
+tower = { version = "0.4", features = ["util"] }
+tempfile = "3.5.0"
