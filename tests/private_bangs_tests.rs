@@ -33,6 +33,7 @@ async fn make_request_with_auth(query: &str, auth_token: &str, config_token: &st
         bangs,
         private_bangs,
         auth_token: config_token.to_string(),
+        host_url: Some("http://localhost:3000".to_string()),
     };
     
     let app = create_router().with_state(config);

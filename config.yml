@@ -1,12 +1,119 @@
 bangs:
-  "!g": "https://www.google.com/search?q={searchTerms}"
-  "!ddg": "https://duckduckgo.com/?q={searchTerms}"
-  "!yt": "https://www.youtube.com/results?search_query={searchTerms}"
-  "!gh": "https://github.com/search?q={searchTerms}"
-  "!w": "https://en.wikipedia.org/wiki/Special:Search?search={searchTerms}"
-  "!maps": "https://www.google.com/maps?q={searchTerms}&source=web"
-  "!reddit": "https://www.reddit.com/search?q={searchTerms}"
-  "!twitter": "https://twitter.com/search?q={searchTerms}" 
-  "!gpt": "https://chatgpt.com/?q={searchTerms}" 
-  "!ai": "https://chatgpt.com/?q={searchTerms}" 
-  "!t3": "https://www.t3.chat/new?q={searchTerms}"
+  "!g": 
+    url: "https://www.google.com/search?q={searchTerms}"
+    name: "Google"
+    icon: "google"
+  "!ddg": 
+    url: "https://duckduckgo.com/?q={searchTerms}"
+    name: "DuckDuckGo"
+    icon: "duck"
+  "!yt": 
+    url: "https://www.youtube.com/results?search_query={searchTerms}"
+    name: "YouTube"
+    icon: "youtube"
+  "!gh": 
+    url: "https://github.com/search?q={searchTerms}"
+    name: "GitHub"
+    icon: "github"
+  "!w": 
+    url: "https://en.wikipedia.org/wiki/Special:Search?search={searchTerms}"
+    name: "Wikipedia"
+    icon: "wikipedia"
+  "!maps": 
+    url: "https://www.google.com/maps?q={searchTerms}&source=web"
+    name: "Google Maps"
+    icon: "map"
+  "!reddit": 
+    url: "https://www.reddit.com/search?q={searchTerms}"
+    name: "Reddit"
+    icon: "reddit"
+  "!twitter": 
+    url: "https://twitter.com/search?q={searchTerms}"
+    name: "Twitter"
+    icon: "twitter"
+  "!gpt": 
+    url: "https://chatgpt.com/?q={searchTerms}"
+    name: "ChatGPT"
+    icon: "openai"
+  "!ai": 
+    url: "https://chatgpt.com/?q={searchTerms}"
+    name: "ChatGPT"
+    icon: "openai"
+  "!t3": 
+    url: "https://www.t3.chat/new?q={searchTerms}"
+    name: "T3 Chat"
+    icon: "t3"
+  "!so": 
+    url: "http://stackoverflow.com/search?q={searchTerms}"
+    name: "Stack Overflow"
+    icon: "stackoverflow"
+  "!gi": 
+    url: "https://google.com/search?tbm=isch&q={searchTerms}&tbs=imgo:1"
+    name: "Google Images"
+    icon: "image"
+  "!ad": 
+    url: "https://developer.apple.com/search/index.php?q={searchTerms}"
+    name: "Apple Developer"
+    icon: "stackoverflow"
+  "!nf": 
+    url: "https://www.netflix.com/search?q={searchTerms}"
+    name: "Netflix"
+    icon: "google"
+  "!atv": 
+    url: "https://duckduckgo.com/?q={searchTerms}%20site%3Atv.apple.com"
+    name: "Apple TV"
+    icon: "google"
+  "!mdn": 
+    url: "https://developer.mozilla.org/search?q={searchTerms}"
+    name: "MDN Web Docs"
+    icon: "google"
+  "!calc": 
+    url: "https://www.cereal.sh/?q=!calc%20{searchTerms}"
+    name: "Calculator"
+    icon: "google"
+  "!weather": 
+    url: "https://www.cereal.sh/?q=!weather%20{searchTerms}"
+    name: "Weather"
+    icon: "google"
+  "!b": 
+    url: "https://www.cereal.sh/?q=!b%20{searchTerms}"
+    name: "Bookmark"
+    icon: "google"
+  "!ba": 
+    url: "https://www.cereal.sh/?q=!b%20{searchTerms}"
+    name: "Add Bookmark"
+    icon: "google"
+  "!bd": 
+    url: "https://www.cereal.sh/?q=!b%20{searchTerms}"
+    name: "Delete Bookmark"
+    icon: "google"
+  "!go": 
+    url: "https://{searchTerms}"
+    name: "Go To"
+    icon: "google"
+  "!sky": 
+    url: "https://www.skygo.co.nz/search?query={searchTerms}"
+    name: "Sky"
+    icon: "google"
+
+
+
+# Private bangs that require authentication
+private_bangs:
+  "!work": 
+    url: "https://company-intranet.example.com/search?q={searchTerms}"
+    name: "Company Intranet"
+    icon: "building"
+  "!jira": 
+    url: "https://jira.example.com/issues/?jql=text~{searchTerms}"
+    name: "Jira"
+    icon: "jira"
+  "!confluence": 
+    url: "https://confluence.example.com/dosearchsite.action?queryString={searchTerms}"
+    name: "Confluence"
+    icon: "confluence"
+
+# Authentication token for accessing private bangs
+auth_token: "youre"
+
+host_url: "https://csh-search-api.fly.dev"

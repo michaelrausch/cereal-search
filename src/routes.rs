@@ -23,6 +23,12 @@ struct BangInfo {
     bang_icon: Option<String>,
 }
 
+/// Add this new struct for OpenSearch response
+#[derive(Serialize)]
+struct OpenSearchResponse {
+    xml: String,
+}
+
 /// Details of a bang for the /bangs endpoint
 #[derive(Serialize)]
 struct BangDetails {
@@ -51,6 +57,7 @@ pub fn create_router() -> Router<Config> {
         .route("/health", get(health_check))
         .route("/live", get(live_handler))
         .route("/bangs", get(bangs_list_handler))
+        .route("/opensearch.xml", get(opensearch_handler))
         .layer(cors)
 }
 
@@ -177,4 +184,30 @@ async fn bangs_list_handler(
     bangs_list.sort_by(|a, b| a.key.cmp(&b.key));
     
     Json(BangsList { bangs: bangs_list })
+}
+
+/// Handler for the OpenSearch description document
+async fn opensearch_handler(State(config): State<Config>) -> impl IntoResponse {
+    let host_url = config.host_url.clone().unwrap_or_else(|| "http://localhost:3000".to_string());
+    
+    // Create the OpenSearch description XML
+    let xml = format!(
+        r#"<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>Bang Search</ShortName>
+  <Description>Search with bangs</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://www.cereal.sh/favicon.ico</Image>
+  <Url type="text/html" method="get" template="{}/search?q={{searchTerms}}"/>
+  <Url type="application/x-suggestions+json" 
+       template="https://www.google.com/complete/search?client=chrome&amp;q={{searchTerms}}"/>
+</OpenSearchDescription>"#,
+        host_url
+    );
+    
+    // Set the content type to XML
+    (
+        [("Content-Type", "application/opensearchdescription+xml")],
+        xml
+    )
 } 

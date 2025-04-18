@@ -22,6 +22,7 @@ pub struct Config {
     pub private_bangs: HashMap<String, BangDetails>,
     #[serde(default)]
     pub auth_token: String,
+    pub host_url: Option<String>,
 }
 
 // Load configuration from a YAML file
@@ -90,5 +91,6 @@ pub fn default_config() -> Config {
         bangs,
         private_bangs,
         auth_token: "".to_string(),
+        host_url: None,
     }
 } 
